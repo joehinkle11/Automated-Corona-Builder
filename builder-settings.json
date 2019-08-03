@@ -3,6 +3,9 @@
     "CoronaBuilderPath": "/Applications/CoronaSDK/Native/Corona/mac/bin/CoronaBuilder.app/Contents/MacOS/",
     "CoronaProjectToBuild": "src/",
 
+    // settings
+    "platformsToBuildTo": ["ios","android"], // "ios" "android" or both
+
     // shared
     "major": 0, // first part of version code X._
     "minor": 0, // second part of version code _.X
