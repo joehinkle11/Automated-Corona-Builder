@@ -1,0 +1,12 @@
+{
+    "pubLevel": "internal", // publication level. "production", "beta", "alpha", or "internal"
+    "major": 0, // first part of version code X._
+    "minor": 0, // second part of version code _.X
+    "appName_ios": "App Name",
+    "appName_android": "App Name",
+    "androidAppPackage": "com.test.app",
+    "androidExtraVersionCode": 1, // if you publish under the same vesrion code, iOS will automatically give you a different build number. On Android you must increment this yourself if you want to publish under the same version code.
+    "iosAppPackage": "com.test.app",
+    "iosProvisionPrefix": "App_Name",
+    "appleAppId": "XXXXXXXXXX"
+}
