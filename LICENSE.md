@@ -1,4 +1,4 @@
-Copyright (c) 2019 Joe Hinkle https://www.joehinkle.io/
+Copyright (c) 2019 Joe Hinkle [https://www.joehinkle.io/](https://www.joehinkle.io/)
 
 This software is provided 'as-is', without any express or implied
 warranty. In no event will the authors be held liable for any damages
