@@ -68,7 +68,7 @@ This project is released zlib/libpng license, see the [LICENSE.md](LICENSE.md) f
 
 * <img src="https://cdnjs.cloudflare.com/ajax/libs/webicons/2.0.0/webicons/webicon-youtube-s.png" width="15"> [My YouTube channel](https://www.youtube.com/channel/UCje9o1NPdBs0vhPp7AEgWvg)
 * <img src="https://cdnjs.cloudflare.com/ajax/libs/webicons/2.0.0/webicons/webicon-youtube-s.png" width="15"> [My second YouTube channel](https://www.youtube.com/channel/UC5aSLB42ZZIDtQXrZgnS1iA)
-* <img src="https://www.joehinkle.io/favicon.png" width="15"> [My Website](https://www.joehinkle.io/)
+* <img src="https://www.joehinkle.io/favicon192x192.png" width="15"> [My Website](https://www.joehinkle.io/)
 * <img src="https://cdnjs.cloudflare.com/ajax/libs/webicons/2.0.0/webicons/webicon-twitter-s.png" width="15"> [My Twitter](https://twitter.com/joehink95)
 * <img src="https://cdnjs.cloudflare.com/ajax/libs/webicons/2.0.0/webicons/webicon-linkedin-s.png" width="15"> [My LinkedIn](https://www.linkedin.com/in/joehinkle11/)
 * <img src="https://cdnjs.cloudflare.com/ajax/libs/webicons/2.0.0/webicons/webicon-android-s.png" width="15"> [My Android Apps](https://play.google.com/store/apps/dev?id=6380399300644608862)
