@@ -17,7 +17,7 @@ The Automated Corona Builder codebase is broken down into the following componen
 | Component (tracked) | Location |
 | ------------------- | -------- |
 | Python script which coordinates the whole build process | `builder.py` |
-| Controls for which themes publish to which deployment level (i.e. prod, beta) and with which version code | `builder-settings.json` |
+| Controls for deployment level (i.e. prod, beta) and with which version code | `builder-settings.json` |
 | Not sure why I'm documenting this obvious piece | `.gitignore` |
 | Private keys used for signing apps | `private_keys/` |
 | Root folder of your Corona SDK project | `src/` |
