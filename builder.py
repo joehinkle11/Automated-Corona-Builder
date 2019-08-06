@@ -35,6 +35,13 @@ def getKeyFromBuildSettings(key):
         raise Exception('There is no "' + key + '" in builder-settings.json')
 
 #
+# vars
+#
+
+dirname, filename = os.path.split(os.path.abspath(__file__))
+buildFolder = dirname + "/" + getKeyFromBuildSettings("BuildFolder")
+
+#
 # startup
 #
 ios_appName = getKeyFromBuildSettings('ios_appName')
@@ -64,13 +71,25 @@ print("\n")
 # 2. Clean the `build_arguments/` and `builds/` folder
 #
 
+if os.path.isdir('build_arguments'):
+    shutil.rmtree('build_arguments')
+os.mkdir('build_arguments')
+
+if os.path.isdir('builds'):
+    shutil.rmtree('builds')
+os.mkdir('builds')
+
 #
 # 3. Create build arguments for each build
 #
+projectsToBuild = []
+for index, platform in enumerate(platformsToBuildTo):
+    projectsToBuild.append({
+        'platform':       platform,
+        'relProjectPath': getKeyFromBuildSettings("CoronaProjectToBuild"),
+    })
 
-
-
-
+print(projectsToBuild)
 
 
 
