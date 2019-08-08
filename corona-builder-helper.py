@@ -124,14 +124,14 @@ for index, project in enumerate(projectsToBuild):
     if project["platform"] == "android":
         data += "androidAppPackage = '" + getKeyFromBuildSettings("android_appPackage")         + "'," + '\n\t'
         data += "androidVersionCode = '" + str(int(project["version"].replace(".", ""))) + str(getKeyFromBuildSettings("android_extraVersionCode")) + "'," + '\n\t'
-        data += "certificatePath = '" + dirname + getKeyFromBuildSettings("android_keystorePath") + "'," + '\n\t'
+        data += "certificatePath = '" + dirname + "/" + getKeyFromBuildSettings("android_keystorePath") + "'," + '\n\t'
         data += "keystorePassword = '" + getKeyFromBuildSettings("android_keystorePassword") + "'," + '\n\t'
         data += "keystoreAlias = '" + getKeyFromBuildSettings("android_keystoreAlias") + "'," + '\n\t'
         data += "keystoreAliasPassword = '" + getKeyFromBuildSettings("android_keystoreAliasPassword") + "'," + '\n'
     elif project["platform"] == "ios":
         # data += "platformVersion = '" + 'iOS11.4' + "'," + '\n\t'
         # data += "platformVersion = '" + 'iOS12.2' + "'," + '\n\t'
-        data += "certificatePath = '" + dirname + getKeyFromBuildSettings("ios_provisionPath") + "'," + '\n'
+        data += "certificatePath = '" + dirname + "/"  + getKeyFromBuildSettings("ios_provisionPath") + "'," + '\n'
     data += "}" + '\n'
     data += "return params"
 
@@ -151,7 +151,7 @@ print("Building each Corona project")
 print("----------------------------")
 for index, project in enumerate(projectsToBuild):
     print(' ' + str(index+1) + " / " + str(len(projectsToBuild)))
-    command = getKeyFromBuildSettings("CoronaBuilderPath") + "CoronaBuilder build --lua " + dirname + "/" + project['relBuildArgumentsPath'] + ".lua"
+    command = getKeyFromBuildSettings("CoronaBuilderPath") + "CoronaBuilder build --lua " + dirname + "/" + project['relBuildArgumentsPath']
     print('  relBuildArgumentsPath:\t'    + project['relBuildArgumentsPath'])
     print('  building...')
     print(command)
