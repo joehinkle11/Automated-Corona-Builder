@@ -167,16 +167,17 @@ for index, project in enumerate(projectsToBuild):
     print(' ' + str(index+1) + " / " + str(len(projectsToBuild)))
     absBuildPathEscapedSpaces = project['absBuildPath'].replace(' ','\\ ')
     release = getKeyFromBuildSettings(project['platform'] + "_pubLevel")
+    packageName = getKeyFromBuildSettings(project['platform'] + "_appPackage")
     print('  project:\t'      + absBuildPathEscapedSpaces)
-    print('  packageName:\t'  + getKeyFromBuildSettings(project['platform'] + "_appPackage")
-    print('  release:\t'      + release
+    print('  packageName:\t'  + packageName )
+    print('  release:\t'      + release )
     print('  platform:\t'      + project['platform'])
 
     if project['platform'] == 'android':
         rolloutPercentage = "1.0"
 
         command =  'fastlane supply '
-        command += '-p ' + project['packageName']                                 + ' '
+        command += '-p ' + packageName                                 + ' '
         command += '-a ' + release                                     + ' '
         command += '-r ' + rolloutPercentage                                      + ' '
         command += '-j ' + dirname + '/private_keys/' + getKeyFromBuildSettings("android_playstoreServiceApiJsonPath")   + ' '
@@ -189,14 +190,14 @@ for index, project in enumerate(projectsToBuild):
         # command += '--verbose'
 
         print('  command:\t'      + command)
-        if not debug:
-            os.system(command)
+        # if not debug:
+        #     os.system(command)
     if project['platform'] == 'ios':
         command =  'fastlane run testflight '
-        command += 'username:"joehinkle11@gmail.com"'                             + ' '
-        command += 'app_identifier:"' + project['packageName'] + '"'              + ' '
+        command += 'username:"' + getKeyFromBuildSettings("ios_testflightUsername") + '"'                             + ' '
+        command += 'app_identifier:"' + packageName + '"'              + ' '
         command += 'app_platform:"ios"'                                           + ' '
-        command += 'apple_id:"' + project['appleAppId'] + '"'                     + ' '
+        command += 'apple_id:"' + getKeyFromBuildSettings('ios_appleAppId') + '"'                     + ' '
         command += 'ipa:"' + project['absBuildPath'] + '"'                        + ' '
         # beta_app_review_info
         # localized_app_info
@@ -210,8 +211,8 @@ for index, project in enumerate(projectsToBuild):
         command += '--verbose'
 
         print('  command:\t'      + command)
-        if not debug:
-            os.system(command)
+        # if not debug:
+            # os.system(command)
 
 
 

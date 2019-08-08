@@ -12,6 +12,7 @@
     "minor": 0, // second part of version code _.X
 
     // iOS
+    "ios_testflightUsername": "my@appleidemail.com",
     "ios_provisionPath": "private_keys/ios_provision.mobileprovision",
     "ios_pubLevel": "internal", // publication level. "production", "beta", "alpha", or "internal"
     "ios_appName": "App Name",
