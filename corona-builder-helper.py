@@ -98,6 +98,7 @@ for index, platform in enumerate(platformsToBuildTo):
         'platform':       platform,
         'appName':        getKeyFromBuildSettings(platform + "_appName"),
         'relProjectPath': getKeyFromBuildSettings("CoronaProjectToBuild"),
+        'relBuildArgumentsPath': 'build_arguments/' + platform + '_' + str(str(getKeyFromBuildSettings("major")) + '.' + str(getKeyFromBuildSettings("minor")).replace(".", "-")) + '.lua',
         'absBuildPath':   absBuildPath,
         'version':        str(getKeyFromBuildSettings("major")) + '.' + str(getKeyFromBuildSettings("minor"))
     })
@@ -135,7 +136,7 @@ for index, project in enumerate(projectsToBuild):
     data += "return params"
 
 
-    fileName = 'build_arguments/' + project["platform"] + '_' + str(project["version"].replace(".", "-")) + '.lua'
+    fileName = project["relBuildArgumentsPath"]
     file = open(fileName, 'w')
     file.write(data)
     file.close()
