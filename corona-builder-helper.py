@@ -151,8 +151,8 @@ print("Building each Corona project")
 print("----------------------------")
 for index, project in enumerate(projectsToBuild):
     print(' ' + str(index+1) + " / " + str(len(projectsToBuild)))
-    command = getKeyFromBuildSettings("CoronaBuilderPath") + "CoronaBuilder build --lua " + dirname + "/" + project['relProjectPath'] + ".lua"
-    print('  relProjectPath:\t'    + project['relProjectPath'])
+    command = getKeyFromBuildSettings("CoronaBuilderPath") + "CoronaBuilder build --lua " + dirname + "/" + project['relBuildArgumentsPath'] + ".lua"
+    print('  relBuildArgumentsPath:\t'    + project['relBuildArgumentsPath'])
     print('  building...')
     print(command)
     os.system(command)
