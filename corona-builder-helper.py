@@ -153,6 +153,7 @@ for index, project in enumerate(projectsToBuild):
     command = getKeyFromBuildSettings("CoronaBuilderPath") + "CoronaBuilder build --lua " + dirname + "/" + project['relProjectPath'] + ".lua"
     print('  relProjectPath:\t'    + project['relProjectPath'])
     print('  building...')
+    print(command)
     os.system(command)
     print("  success!")
 
