@@ -80,16 +80,52 @@ if os.path.isdir('builds'):
 os.mkdir('builds')
 
 #
-# 3. Create build arguments for each build
+# Put the jobs into an array so we can loop through each job at each step together
 #
+
 projectsToBuild = []
 for index, platform in enumerate(platformsToBuildTo):
     projectsToBuild.append({
         'platform':       platform,
+        'appName':        getKeyFromBuildSettings(platform + "_appName"),
         'relProjectPath': getKeyFromBuildSettings("CoronaProjectToBuild"),
+        'version':        str(getKeyFromBuildSettings("major")) + '.' + str(getKeyFromBuildSettings("minor"))
     })
 
-print(projectsToBuild)
+#
+# 3. Create build arguments for each build
+#
+
+for index, project in enumerate(projectsToBuild):
+    data = "local params ="                                            + '\n'
+    data += "{"                                                        + '\n\t'
+    data += "-- general params"                                        + '\n\t'
+    data += "platform = '"    + project["platform"]             + "'," + '\n\t'
+    data += "appName = '"     + project["appName"]              + "'," + '\n\t'
+    data += "appVersion = '"  + project["version"]              + "'," + '\n\t'
+    data += "dstPath = '"     + dirname + "/builds"             + "'," + '\n\t'
+    data += "projectPath = '" + dirname + "/" + project["relProjectPath"]  + "'," + '\n\t'
+
+    data += "\n\t-- " + project["platform"] + " specific params" + '\n\t'
+    if project["platform"] == "android":
+        data += "androidAppPackage = '" + getKeyFromBuildSettings("android_appPackage")         + "'," + '\n\t'
+        data += "androidVersionCode = '" + str(int(project["version"].replace(".", ""))) + str(getKeyFromBuildSettings("android_extraVersionCode")) + "'," + '\n\t'
+        data += "certificatePath = '" + dirname + getKeyFromBuildSettings("android_keystorePath") + "'," + '\n\t'
+        data += "keystorePassword = '" + getKeyFromBuildSettings("android_keystorePassword") + "'," + '\n\t'
+        data += "keystoreAlias = '" + getKeyFromBuildSettings("android_keystoreAlias") + "'," + '\n\t'
+        data += "keystoreAliasPassword = '" + getKeyFromBuildSettings("android_keystoreAliasPassword") + "'," + '\n'
+    elif project["platform"] == "ios":
+        # data += "platformVersion = '" + 'iOS11.4' + "'," + '\n\t'
+        # data += "platformVersion = '" + 'iOS12.2' + "'," + '\n\t'
+        data += "certificatePath = '" + dirname + getKeyFromBuildSettings("ios_provisionPath") + "'," + '\n'
+    data += "}" + '\n'
+    data += "return params"
+
+
+    fileName = 'build_arguments/' + project["platform"] + '_' + str(project["version"].replace(".", "-")) + '.lua'
+    file = open(fileName, 'w')
+    file.write(data)
+    file.close()
 
 
 

@@ -12,6 +12,7 @@
     "minor": 0, // second part of version code _.X
 
     // iOS
+    "ios_provisionPath": "private_keys/ios_provision.mobileprovision",
     "ios_pubLevel": "internal", // publication level. "production", "beta", "alpha", or "internal"
     "ios_appName": "App Name",
     "ios_appPackage": "com.test.app",
@@ -19,6 +20,10 @@
     "ios_appleAppId": "XXXXXXXXXX",
 
     // Android
+    "android_keystorePath": "private_keys/android_key.keystore",
+    "android_keystorePassword": "examplePassword",
+    "android_keystoreAlias": "exampleAlias",
+    "android_keystoreAliasPassword": "exampleAliasPassword",
     "android_pubLevel": "internal", // publication level. "production", "beta", "alpha", or "internal"
     "android_appName": "App Name",
     "android_appPackage": "com.test.app",

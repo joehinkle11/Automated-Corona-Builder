@@ -3,5 +3,5 @@
 # ignore stuff related to our Automated Corona Builder command line tools
 *.pyc
 private_keys/
-compiled_projects/
+build_arguments/
 builds/
