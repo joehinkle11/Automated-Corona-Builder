@@ -1,6 +1,6 @@
 {
     // paths
-    "CoronaBuilderPath": "/Applications/CoronaSDK/Native/Corona/mac/bin/CoronaBuilder.app/Contents/MacOS/",
+    "CoronaBuilderPath": "/Applications/Corona/Native/Corona/mac/bin/CoronaBuilder.app/Contents/MacOS/",
     "CoronaProjectToBuild": "src/",
     "BuildFolder": "builds/",
 
@@ -20,6 +20,7 @@
     "ios_appleAppId": "XXXXXXXXXX",
 
     // Android
+    "android_playstoreServiceApiJsonPath": "private_keys/your_google_play_api_key.json",
     "android_keystorePath": "private_keys/android_key.keystore",
     "android_keystorePassword": "examplePassword",
     "android_keystoreAlias": "exampleAlias",

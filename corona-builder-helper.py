@@ -68,9 +68,12 @@ if 'android' in platformsToBuildTo:
 print("\n")
 
 #
-# 2. Clean the `build_arguments/` and `builds/` folder
+# 2. Clean the `build_arguments/` and `builds/` folders
 #
 
+print("\n----------------------------")
+print("Cleaning the `build_arguments/` and `builds/` folders")
+print("----------------------------")
 if os.path.isdir('build_arguments'):
     shutil.rmtree('build_arguments')
 os.mkdir('build_arguments')
@@ -85,10 +88,17 @@ os.mkdir('builds')
 
 projectsToBuild = []
 for index, platform in enumerate(platformsToBuildTo):
+    absBuildPath = dirname + "/builds/" + getKeyFromBuildSettings(platform + "_appName")
+    if platform == 'ios':
+        absBuildPath += ".ipa"
+    if platform == 'android':
+        absBuildPath += ".apk"
+
     projectsToBuild.append({
         'platform':       platform,
         'appName':        getKeyFromBuildSettings(platform + "_appName"),
         'relProjectPath': getKeyFromBuildSettings("CoronaProjectToBuild"),
+        'absBuildPath':   absBuildPath,
         'version':        str(getKeyFromBuildSettings("major")) + '.' + str(getKeyFromBuildSettings("minor"))
     })
 
@@ -96,6 +106,9 @@ for index, platform in enumerate(platformsToBuildTo):
 # 3. Create build arguments for each build
 #
 
+print("\n------------------------------------------")
+print("Creating build arguments for CoronaBuilder")
+print("------------------------------------------")
 for index, project in enumerate(projectsToBuild):
     data = "local params ="                                            + '\n'
     data += "{"                                                        + '\n\t'
@@ -128,8 +141,77 @@ for index, project in enumerate(projectsToBuild):
     file.close()
 
 
+#
+# 4. Run `CoronaBuilder` on the Corona project found in `src` for each build argument file found in `build_arguments/` and puts the output into `builds/`
+#
 
+print("\n----------------------------")
+print("Building each Corona project")
+print("----------------------------")
+for index, project in enumerate(projectsToBuild):
+    print(' ' + str(index+1) + " / " + str(len(projectsToBuild)))
+    command = getKeyFromBuildSettings("CoronaBuilderPath") + "CoronaBuilder build --lua " + dirname + "/" + project['relProjectPath'] + ".lua"
+    print('  relProjectPath:\t'    + project['relProjectPath'])
+    print('  building...')
+    os.system(command)
+    print("  success!")
 
+#
+# 5. Run Fastlane's CLI to upload for each built app found in `builds` to either the App Store or Playstore
+#
+
+print("\n------------------------")
+print("Uploading each built app")
+print("------------------------")
+for index, project in enumerate(projectsToBuild):
+    print(' ' + str(index+1) + " / " + str(len(projectsToBuild)))
+    absBuildPathEscapedSpaces = project['absBuildPath'].replace(' ','\\ ')
+    release = getKeyFromBuildSettings(project['platform'] + "_pubLevel")
+    print('  project:\t'      + absBuildPathEscapedSpaces)
+    print('  packageName:\t'  + getKeyFromBuildSettings(project['platform'] + "_appPackage")
+    print('  release:\t'      + release
+    print('  platform:\t'      + project['platform'])
+
+    if project['platform'] == 'android':
+        rolloutPercentage = "1.0"
+
+        command =  'fastlane supply '
+        command += '-p ' + project['packageName']                                 + ' '
+        command += '-a ' + release                                     + ' '
+        command += '-r ' + rolloutPercentage                                      + ' '
+        command += '-j ' + dirname + '/private_keys/' + getKeyFromBuildSettings("android_playstoreServiceApiJsonPath")   + ' '
+        command += '-b ' + absBuildPathEscapedSpaces                              + ' '
+        command += '--skip_upload_metadata true'                                  + ' '
+        command += '--skip_upload_images true'                                    + ' '
+        command += '--skip_upload_screenshots true'                               + ' '
+        command += '--track_promote_to ' + release                     + ' '
+        # command += '--validate_only true'                                         + ' '
+        # command += '--verbose'
+
+        print('  command:\t'      + command)
+        if not debug:
+            os.system(command)
+    if project['platform'] == 'ios':
+        command =  'fastlane run testflight '
+        command += 'username:"joehinkle11@gmail.com"'                             + ' '
+        command += 'app_identifier:"' + project['packageName'] + '"'              + ' '
+        command += 'app_platform:"ios"'                                           + ' '
+        command += 'apple_id:"' + project['appleAppId'] + '"'                     + ' '
+        command += 'ipa:"' + project['absBuildPath'] + '"'                        + ' '
+        # beta_app_review_info
+        # localized_app_info
+        # beta_app_description
+        # beta_app_feedback_email
+        # localized_build_info
+        # changelog
+        command += 'skip_submission:"false"'                                      + ' '
+        command += 'distribute_external:"false"'                                  + ' '
+        command += 'notify_external_testers:"true"'                               + ' '
+        command += '--verbose'
+
+        print('  command:\t'      + command)
+        if not debug:
+            os.system(command)
 
 
 
