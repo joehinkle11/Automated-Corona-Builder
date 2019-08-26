@@ -182,7 +182,7 @@ for index, project in enumerate(projectsToBuild):
         command += '-p ' + packageName                                 + ' '
         command += '-a ' + release                                     + ' '
         command += '-r ' + rolloutPercentage                                      + ' '
-        command += '-j ' + dirname + '/private_keys/' + getKeyFromBuildSettings("android_playstoreServiceApiJsonPath")   + ' '
+        command += '-j ' + dirname + getKeyFromBuildSettings("android_playstoreServiceApiJsonPath")   + ' '
         command += '-b ' + absBuildPathEscapedSpaces                              + ' '
         command += '--skip_upload_metadata true'                                  + ' '
         command += '--skip_upload_images true'                                    + ' '
