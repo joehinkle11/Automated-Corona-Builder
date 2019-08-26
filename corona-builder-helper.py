@@ -13,6 +13,7 @@ import shutil, errno
 #
 
 automatedBuildSettings = 'builder-settings.json'
+shouldPublish = True
 
 #
 # helper functions
@@ -192,8 +193,8 @@ for index, project in enumerate(projectsToBuild):
         # command += '--verbose'
 
         print('  command:\t'      + command)
-        # if not debug:
-        #     os.system(command)
+        if shouldPublish:
+            os.system(command)
     if project['platform'] == 'ios':
         command =  'fastlane run testflight '
         command += 'username:"' + getKeyFromBuildSettings("ios_testflightUsername") + '"'                             + ' '
@@ -213,8 +214,8 @@ for index, project in enumerate(projectsToBuild):
         command += '--verbose'
 
         print('  command:\t'      + command)
-        # if not debug:
-            # os.system(command)
+        if shouldPublish:
+            os.system(command)
 
 
 
