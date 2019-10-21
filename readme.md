@@ -1,4 +1,4 @@
-Fyi, I'm still putting this together.
+Fyi, I'm still putting this together. Most of the work I've done is in `corona-builder-helper.py`, so checkout that file if you want to see what has been accomplished so far. Automatic builds currently work, but I want to streamline the setup process before showing this to more people in the Corona community.
 
 # <img src="https://coronalabs.com/wordpress/wp-content/uploads/2014/12/Flat-Corona-300x300-75x75.png" width="30"> Welcome to the Automated Corona Builder <img src="https://coronalabs.com/wordpress/wp-content/uploads/2014/12/Flat-Corona-300x300-75x75.png" width="30">
 
