@@ -1,5 +1,9 @@
 Fyi, I'm still putting this together. Most of the work I've done is in `corona-builder-helper.py`, so checkout that file if you want to see what has been accomplished so far. Automatic builds currently work, but I want to streamline the setup process before showing this to more people in the Corona community.
 
+I'm also working to make this CLI support multiple app versions, localization, automatic screenshots, and automatic icon sizing and plan to convert most of my projects to fit into this CLI.
+
+My ultimate goal is to have this project be cloneable to start a fully language localized, versioned (paid/free?), screenshotted, Corona SDK project. And you only need to supply one 1024x1024 for icons to work.
+
 # <img src="https://coronalabs.com/wordpress/wp-content/uploads/2014/12/Flat-Corona-300x300-75x75.png" width="30"> Welcome to the Automated Corona Builder <img src="https://coronalabs.com/wordpress/wp-content/uploads/2014/12/Flat-Corona-300x300-75x75.png" width="30">
 
 ## Project Overview
